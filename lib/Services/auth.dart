@@ -19,7 +19,7 @@ class AuthorizationService {
   } //try
 
 
-  Future <User?> signUpWithEmailAndPassword(String email, String password) async {
+  Future <User?> registerWithEmailAndPassword(String email, String password) async {
 
     try{
 
@@ -31,6 +31,16 @@ class AuthorizationService {
       return null;
     } //catch
   } //try
+
+Future logOut() async {
+    await _firebaseAuth.signOut(); //на будущее
+}
+/*
+Stream<User> get currentUser{
+    return _firebaseAuth.authStateChanges().asyncMap((User user) => user != null ? Userclass.fromFirebase(user): null); //подключение к потоку
+       // .map((User user) => user != null ? Userclass.fromFirebase(user): null);
+} //Stream
+*/
 }
 
 

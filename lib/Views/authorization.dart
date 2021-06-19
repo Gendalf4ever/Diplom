@@ -1,18 +1,27 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pkgh_app/Services/auth.dart';
+import 'package:pkgh_app/Services/authentification_service.dart';
+import 'package:pkgh_app/Views/user.dart';
 class Authorization extends StatefulWidget {
   //Authorization({required Key key}) : super(key: key)
   // ignore: empty_constructor_bodies
   @override
-  _AuthorizationState createState() => _AuthorizationState();
+ _AuthorizationState createState() => _AuthorizationState();
 
 }
 
 class _AuthorizationState extends State<Authorization> {
 TextEditingController _emailController = TextEditingController();
 TextEditingController _passwordController = TextEditingController();
-late String email;
-late String password;
+late String _email;
+late String _password;
 bool showLogin = true;
+//AuthorizationService _authorizationService = AuthorizationService();
+
+
+
   @override
   Widget build(BuildContext context){
     Widget _logo(){
@@ -70,12 +79,37 @@ return Padding(
         );
     }
 
-    void someAction(){
-      email = _emailController.text;
-      password = _passwordController.text;
+    void loginButtonAction() async {
+      _email = _emailController.text;
+      _password = _passwordController.text;
+
+      if (_email.isEmpty || _password.isEmpty);
+     Fluttertoast.showToast(
+         msg: "Введите пожалуйста логин и пароль",
+             toastLength: Toast.LENGTH_SHORT,
+             gravity: ToastGravity.CENTER,
+             timeInSecForIosWeb: 5,
+             backgroundColor: Colors.red,
+             textColor: Colors.white,
+             fontSize: 16.0
+     );
+      //return
+     /*   Userclassuser = await _authorizationService.signInWithEmailAndPassword(_email.trim(), _password.trim());
+      if (user == null) {
+
+      } else {
+      _emailController.clear();
+      _passwordController.clear();
+    } */
+    }
+
+    void registerButtonAction(){
+      _email = _emailController.text;
+      _password = _passwordController.text;
       _emailController.clear();
       _passwordController.clear();
     }
+
 
     Widget _bottomWave(){
       return Expanded(
@@ -130,7 +164,11 @@ Widget _form(String label, void press()){
                 width: MediaQuery.of(context).size.width,
                 child: _button(label, press),
               ),
-            )
+            ),
+            //tut
+
+
+
           ],
         ),
       );
@@ -145,7 +183,8 @@ body: Column(
         showLogin
         ? Column(
           children: <Widget>[
-            _form('Login', someAction),
+            _form('Login',loginButtonAction),
+
             Padding(
               padding: EdgeInsets.all(10),
               child: GestureDetector(
@@ -167,7 +206,7 @@ body: Column(
         :
         Column(
           children: <Widget>[
-            _form('Register', someAction),
+            _form('Register', registerButtonAction),
             Padding(
               padding: EdgeInsets.all(10),
               child: GestureDetector(
@@ -183,10 +222,12 @@ body: Column(
                   });
                 },
               ),
+
             ),
           ],
         )
     ),
+
     _bottomWave(),
   ]
 ),
