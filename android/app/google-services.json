@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1098678313254",
+    "project_id": "pkgh-table",
+    "storage_bucket": "pkgh-table.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098678313254:android:b019631da4a16f125821e7",
+        "android_client_info": {
+          "package_name": "com.smellcode.pkghsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098678313254-j509kirge716t46iiq2bisivu5i0kck2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOL8I2mXtzw3yLbs4XOPITGonsqybHWp4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098678313254-j509kirge716t46iiq2bisivu5i0kck2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1098678313254-ciu5ai8bbhdcq6ek8dul6i7q9smlptgf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.smellcode.pkghsystem"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
