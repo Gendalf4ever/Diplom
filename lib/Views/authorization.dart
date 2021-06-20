@@ -18,7 +18,7 @@ TextEditingController _passwordController = TextEditingController();
 late String _email;
 late String _password;
 bool showLogin = true;
-//AuthorizationService _authorizationService = AuthorizationService();
+AuthorizationService _authorizationService = AuthorizationService();
 
 
 
@@ -94,21 +94,57 @@ return Padding(
              fontSize: 16.0
      );
       //return
-     /*   Userclassuser = await _authorizationService.signInWithEmailAndPassword(_email.trim(), _password.trim());
-      if (user == null) {
+      Userclass user = (await  _authorizationService.signInWithEmailAndPassword(_email.trim(), _password.trim())) as Userclass;
 
+      if (user == null) {
+        Fluttertoast.showToast(
+            msg: "Ощибка регистрации. Проверьте пожалуйста логин и пароль",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 5,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
       } else {
       _emailController.clear();
       _passwordController.clear();
-    } */
+    }
     }
 
-    void registerButtonAction(){
+    void registerButtonAction() async {
       _email = _emailController.text;
       _password = _passwordController.text;
-      _emailController.clear();
-      _passwordController.clear();
+
+      if (_email.isEmpty || _password.isEmpty);
+      Fluttertoast.showToast(
+          msg: "Введите пожалуйста логин и пароль",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 5,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+      //return
+      Userclass user = (await  _authorizationService.registerWithEmailAndPassword(_email.trim(), _password.trim())) as Userclass;
+
+      if (user == null) {
+        Fluttertoast.showToast(
+            msg: "Ощибка входа. Проверьте пожалуйста логин и пароль",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 5,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
+      } else {
+        _emailController.clear();
+        _passwordController.clear();
+      }
     }
+
 
 
     Widget _bottomWave(){

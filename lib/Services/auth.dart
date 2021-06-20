@@ -14,6 +14,7 @@ class AuthorizationService {
       Future<User> tuts = Userclass.fromFirebase(userr!) as Future<User>;
       return tuts;
     }catch(e){
+      print(e);
      return null;
     } //catch
   } //try
@@ -28,6 +29,7 @@ class AuthorizationService {
       Future<User> tuts = Userclass.fromFirebase(userr!) as Future<User>;
       return tuts;
     }catch(e){
+      print(e);
       return null;
     } //catch
   } //try

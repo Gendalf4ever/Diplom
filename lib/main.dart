@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pkgh_app/Views/authorization.dart';
 import 'package:pkgh_app/Views/landing.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'Views/table.dart';
 import 'Views/home.dart';
-void main() {
+Future<void> main() async {
+   await Firebase.initializeApp(); //!
   runApp(Main());
 }
 class Main extends StatelessWidget {
