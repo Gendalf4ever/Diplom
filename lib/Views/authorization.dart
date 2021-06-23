@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pkgh_app/Services/auth.dart';
 import 'package:pkgh_app/Services/authentification_service.dart';
+import 'package:pkgh_app/Views/home.dart';
 import 'package:pkgh_app/Views/user.dart';
 class Authorization extends StatefulWidget {
   //Authorization({required Key key}) : super(key: key)
@@ -18,7 +19,7 @@ TextEditingController _passwordController = TextEditingController();
 late String _email;
 late String _password;
 bool showLogin = true;
-AuthorizationService _authorizationService = AuthorizationService();
+bool isLoading = false;
 
 
 
@@ -42,7 +43,8 @@ return Padding(
 
     Widget _input(Icon icon, String hint,
         TextEditingController controller, bool obscure){
-        return Container(
+        return isLoading ==false ?
+          Container(
             padding: EdgeInsets.only(left: 20, right: 20),
             child: TextField(
               controller: controller,
@@ -76,6 +78,8 @@ return Padding(
       )
             ),
             )
+        ) : Center(
+          child: CircularProgressIndicator(),
         );
     }
 
@@ -93,57 +97,11 @@ return Padding(
              textColor: Colors.white,
              fontSize: 16.0
      );
-      //return
-      Userclass user = (await  _authorizationService.signInWithEmailAndPassword(_email.trim(), _password.trim())) as Userclass;
 
-      if (user == null) {
-        Fluttertoast.showToast(
-            msg: "Ошибка входа. Проверьте пожалуйста логин и пароль",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 5,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0
-        );
-      } else {
-      _emailController.clear();
-      _passwordController.clear();
-    }
+
     }
 
-    void registerButtonAction() async {
-      _email = _emailController.text;
-      _password = _passwordController.text;
 
-      if (_email.isEmpty || _password.isEmpty);
-      Fluttertoast.showToast(
-          msg: "Введите пожалуйста логин и пароль",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 5,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0
-      );
-      //return
-      Userclass user = (await  _authorizationService.registerWithEmailAndPassword(_email.trim(), _password.trim())) as Userclass;
-
-      if (user == null) {
-        Fluttertoast.showToast(
-            msg: "Ощибка регистрации. Проверьте пожалуйста логин и пароль",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 5,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0
-        );
-      } else {
-        _emailController.clear();
-        _passwordController.clear();
-      }
-    }
 
 
 
@@ -175,31 +133,29 @@ return Padding(
         ),
         onPressed: (){
           press();
+          setState(() {
+            isLoading = true;
+          });
+        Authclass().signIn(email: _email.trim(), password: _password.trim()).then((value) {
+          if (value == "Welcome"){
+            setState(() {
+              isLoading = false;
+            });
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage()), (route) => false);
+          } else {
+            setState(() {
+              isLoading = false;
+            });
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value)));
+          }
+        }
+        );
         },
 
       );
     }
 
 
-    /*
-    Widget _registerButton(String text, void press()){
-      return RaisedButton(
-        splashColor: Theme.of(context).primaryColor,
-        highlightColor: Theme.of(context).primaryColor,
-        color: Colors.white,
-        child: Text(
-          "Зарегистрироваться",
-          style: TextStyle(fontWeight: FontWeight.bold,
-              color: Theme.of(context).primaryColor,
-              fontSize: 20
-          ),
-        ),
-        onPressed: (){
-          press();
-        },
-      );
-    }
-    */
 
 
 Widget _form(String label, void press()){
@@ -223,19 +179,6 @@ Widget _form(String label, void press()){
                 child: _button(label, press),
               ),
             ),
-
-            /*
-            Padding(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 20),
-              child: Container(
-                height: 50,
-                width: MediaQuery.of(context).size.width,
-                child: _registerButton(label, press),
-              ),
-            ),
-
-           */
-
           ],
         ),
       );
@@ -247,52 +190,16 @@ body: Column(
     _logo(),
     SizedBox(height: 50),
     (
-        showLogin
-        ? Column(
+        Column(
           children: <Widget>[
             _form('Login',loginButtonAction),
 
             Padding(
               padding: EdgeInsets.all(10),
-              child: GestureDetector(
-                child: Text('Не заригестрирован? Зарегестрируйся!',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white
-                ),
-                ),
-                onTap:(){
-                  setState((){
-                    showLogin = true;
-              });
-              },
-              ),
             ),
           ],
         )
-        :
-        Column(
-          children: <Widget>[
-            _form('Register', registerButtonAction),
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: GestureDetector(
-                child: Text('Заригестрирован? Зайди!',
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white
-                  ),
-                ),
-                onTap:(){
-                  setState((){
-                    showLogin = false;
-                  });
-                },
-              ),
 
-            ),
-          ],
-        )
     ),
 
     _bottomWave(),

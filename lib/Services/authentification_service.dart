@@ -14,26 +14,10 @@ Future<String> createAccount({ required String email,  required String password}
   );
  } on FirebaseAuthException catch (e) {
   if (e.code == 'weak-password') {
-   Fluttertoast.showToast(
-       msg: "Слабый пароль. Придумайте другой пароль",
-       toastLength: Toast.LENGTH_SHORT,
-       gravity: ToastGravity.CENTER,
-       timeInSecForIosWeb: 5,
-       backgroundColor: Colors.red,
-       textColor: Colors.white,
-       fontSize: 16.0
-   );
+
    print('The password provided is too weak.');
   } else if (e.code == 'email-already-in-use') {
-   Fluttertoast.showToast(
-       msg: "Данный пользователь уже зарегестрирован",
-       toastLength: Toast.LENGTH_SHORT,
-       gravity: ToastGravity.CENTER,
-       timeInSecForIosWeb: 5,
-       backgroundColor: Colors.red,
-       textColor: Colors.white,
-       fontSize: 16.0
-   );
+
    print('The account already exists for that email.');
   }
  } catch (e) {
@@ -53,30 +37,13 @@ return "Account created";
    );
   } on FirebaseAuthException catch (e) {
    if (e.code == 'user-not-found') {
-    Fluttertoast.showToast(
-        msg: "Данный email не найден",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 5,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
-    print('No user found for that email.');
+
+    return('No user found for that email.');
    } else if (e.code == 'wrong-password') {
-    Fluttertoast.showToast(
-        msg: "Неверный пароль",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 5,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
-    print('Wrong password provided for that user.');
+    return('Wrong password provided for that user.');
    }
   }
-  return "User signed in";
+  return "Welcome";
  }
 
  //Reset Password
