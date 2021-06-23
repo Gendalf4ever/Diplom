@@ -98,7 +98,7 @@ return Padding(
 
       if (user == null) {
         Fluttertoast.showToast(
-            msg: "Ощибка регистрации. Проверьте пожалуйста логин и пароль",
+            msg: "Ошибка входа. Проверьте пожалуйста логин и пароль",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 5,
@@ -131,7 +131,7 @@ return Padding(
 
       if (user == null) {
         Fluttertoast.showToast(
-            msg: "Ощибка входа. Проверьте пожалуйста логин и пароль",
+            msg: "Ощибка регистрации. Проверьте пожалуйста логин и пароль",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 5,
@@ -180,6 +180,28 @@ return Padding(
       );
     }
 
+
+    /*
+    Widget _registerButton(String text, void press()){
+      return RaisedButton(
+        splashColor: Theme.of(context).primaryColor,
+        highlightColor: Theme.of(context).primaryColor,
+        color: Colors.white,
+        child: Text(
+          "Зарегистрироваться",
+          style: TextStyle(fontWeight: FontWeight.bold,
+              color: Theme.of(context).primaryColor,
+              fontSize: 20
+          ),
+        ),
+        onPressed: (){
+          press();
+        },
+      );
+    }
+    */
+
+
 Widget _form(String label, void press()){
       return Container(
         child: Column(
@@ -201,9 +223,18 @@ Widget _form(String label, void press()){
                 child: _button(label, press),
               ),
             ),
-            //tut
 
+            /*
+            Padding(
+              padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+              child: Container(
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                child: _registerButton(label, press),
+              ),
+            ),
 
+           */
 
           ],
         ),

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-class Userclass{
+ class Userclass{
  late String? id;
 
 Userclass.fromFirebase(User user){

@@ -37,12 +37,12 @@ class AuthorizationService {
 Future logOut() async {
     await _firebaseAuth.signOut(); //на будущее
 }
-/*
-Stream<User> get currentUser{
-    return _firebaseAuth.authStateChanges().asyncMap((User user) => user != null ? Userclass.fromFirebase(user): null); //подключение к потоку
+
+//Stream<User> get currentUser{
+   // return _firebaseAuth.authStateChanges().asyncMap((User user) => user != null ? Userclass.fromFirebase(user): null); //подключение к потоку
        // .map((User user) => user != null ? Userclass.fromFirebase(user): null);
-} //Stream
-*/
+//} //Stream
+
 }
 
 
