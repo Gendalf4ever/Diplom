@@ -1,10 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:pkgh_app/Services/auth.dart';
 import 'package:pkgh_app/Services/authentification_service.dart';
 import 'package:pkgh_app/Views/home.dart';
-import 'package:pkgh_app/Views/user.dart';
 class Authorization extends StatefulWidget {
   //Authorization({required Key key}) : super(key: key)
   // ignore: empty_constructor_bodies
@@ -86,7 +83,7 @@ return Padding(
     void loginButtonAction() async {
       _email = _emailController.text;
       _password = _passwordController.text;
-
+ /*
       if (_email.isEmpty || _password.isEmpty);
      Fluttertoast.showToast(
          msg: "Введите пожалуйста логин и пароль",
@@ -98,12 +95,8 @@ return Padding(
              fontSize: 16.0
      );
 
-
+ */
     }
-
-
-
-
 
     Widget _bottomWave(){
       return Expanded(
@@ -154,9 +147,6 @@ return Padding(
 
       );
     }
-
-
-
 
 Widget _form(String label, void press()){
       return Container(

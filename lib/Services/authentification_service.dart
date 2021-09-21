@@ -15,10 +15,10 @@ Future<String> createAccount({ required String email,  required String password}
  } on FirebaseAuthException catch (e) {
   if (e.code == 'weak-password') {
 
-   print('The password provided is too weak.');
+   print('Пароль слишком слабый. Для обеспечения безопасности пожалуйста придумайте другой пароль');
   } else if (e.code == 'email-already-in-use') {
 
-   print('The account already exists for that email.');
+   print('Данный email уже зарегестрирован.');
   }
  } catch (e) {
   print(e);
@@ -38,9 +38,9 @@ return "Account created";
   } on FirebaseAuthException catch (e) {
    if (e.code == 'user-not-found') {
 
-    return('No user found for that email.');
+    return('Пользователь с таким email не найден.');
    } else if (e.code == 'wrong-password') {
-    return('Wrong password provided for that user.');
+    return('Введен неверный пароль');
    }
   }
   return "Welcome";

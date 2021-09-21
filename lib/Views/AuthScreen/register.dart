@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:pkgh_app/Services/auth.dart';
 import 'package:pkgh_app/Services/authentification_service.dart';
-import 'package:pkgh_app/Views/user.dart';
+import 'package:pkgh_app/Views/authorization.dart';
 class RegisterPage extends StatefulWidget {
   //Authorization({required Key key}) : super(key: key)
   // ignore: empty_constructor_bodies
@@ -80,7 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
     void registerButtonAction() async {
       _email = _emailController.text;
       _password = _passwordController.text;
-
+ /*
       if (_email.isEmpty || _password.isEmpty);
       Fluttertoast.showToast(
           msg: "Введите пожалуйста логин и пароль",
@@ -91,7 +89,20 @@ class _RegisterPageState extends State<RegisterPage> {
           textColor: Colors.white,
           fontSize: 16.0
       );
-      //return
+ */
+     Authclass().createAccount(email: _email,  password: _password);
+
+       Fluttertoast.showToast(
+           msg: "Регистрация прошла успешно!",
+           toastLength: Toast.LENGTH_SHORT,
+           gravity: ToastGravity.CENTER,
+           timeInSecForIosWeb: 5,
+           backgroundColor: Colors.blueGrey,
+           textColor: Colors.white,
+           fontSize: 16.0
+       );
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Authorization()), (route) => false);
+
     }
 
 

@@ -20,7 +20,7 @@ class _SplashState extends State<Splash> {
                 (route) => false);
       } else
         Navigator.pushAndRemoveUntil(context,
-            MaterialPageRoute(builder: (context) => PageHome()),
+            MaterialPageRoute(builder: (context) => HomePage()),
                 (route) => false);
     }
     );
